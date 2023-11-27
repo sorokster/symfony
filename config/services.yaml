@@ -22,3 +22,13 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+
+    App\Shortener\Interface\IUrlEncoder:
+        class: App\Shortener\UrlShortener
+
+    App\Shortener\Interface\IUrlDecoder:
+        class: App\Shortener\UrlShortener
+
+    App\Shortener\Interface\IUrlCodeService:
+        class: App\Service\UrlCodeService
+
