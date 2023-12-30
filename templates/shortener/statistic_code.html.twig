@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Статистика урлів{{ parent() }}{% endblock %}
+
+{% block content %}
+<h1>Urls info </h1>
+{{ include('url/add_url_block.html.twig') }}
+    {% for url_code in url_codes %}
+        <div class="container user-block">
+            <div class="row">
+                <div class="col-3">
+                    {{ print_favicon(url_code.url)|raw }}
+                    Переходів: {{ url_code.counter }}
+                </div>
+                <div class="col">
+                    Id: {{ url_code.id }}
+                    <br>
+                    code: <a href="{{ path('statistic_url', {code: url_code.code}) }}">{{ url_code.code }}</a>
+                    <br>
+                    url: {{ url_code.url }}
+                    <br>
+                    user: {{ url_code.user.email }}
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    {% block additionalData %} {% endblock %}
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}

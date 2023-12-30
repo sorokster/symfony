@@ -1,16 +1,16 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Shortener | Encode!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
-        {% block stylesheets %}
-        {% endblock %}
+{% extends 'base.html.twig' %}
 
-        {% block javascripts %}
-        {% endblock %}
-    </head>
-    <body>
-        <h1>Code: {{ code }}</h1>
-    </body>
-</html>
+{% block title %}Encode{{ parent() }}{% endblock %}
+
+{% block body %}
+    <h1>Urls info</h1>
+    <div>
+        <form action="{{ path('shortener_encode') }}" method="post">
+            <label>
+                Url:
+                <input type="text" name="url">
+            </label>
+            <button type="submit">Add url</button>
+        </form>
+    </div>
+{% endblock %}

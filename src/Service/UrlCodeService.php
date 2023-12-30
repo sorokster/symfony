@@ -3,7 +3,8 @@
 namespace App\Service;
 
 use App\Entity\UrlCode;
-use App\Factory\UrlCodeFactory;
+use App\Entity\User;
+use App\Factory\UrlCodeEntityFactory;
 use App\Repository\UrlCodeRepository;
 use App\Shortener\Interface\IUrlCodeService;
 use App\Shortener\ValueObject\UrlCodeValueObject;
@@ -19,9 +20,9 @@ class UrlCodeService implements IUrlCodeService
 
     /**
      * @param EntityManagerInterface $entityManager
-     * @param UrlCodeFactory $factory
+     * @param UrlCodeEntityFactory $factory
      */
-    public function __construct(protected EntityManagerInterface $entityManager, protected UrlCodeFactory $factory)
+    public function __construct(protected EntityManagerInterface $entityManager, protected UrlCodeEntityFactory $factory)
     {
         $this->repository = $this->entityManager->getRepository(UrlCode::class);
     }
@@ -43,10 +44,19 @@ class UrlCodeService implements IUrlCodeService
      */
     public function getRecord(string $code): ?UrlCodeValueObject
     {
-        if (is_null($url = $this->repository->findOneBy(['code' => $code])->getUrl())) {
+        if (empty($url = $this->repository->findOneBy(['code' => $code])?->getUrl())) {
             return null;
         }
 
         return new UrlCodeValueObject($url, $code);
+    }
+
+    /**
+     * @param User $user
+     * @return UrlCode[]|array|object[]
+     */
+    public function getAllObjects(User $user): array
+    {
+        return $this->repository->findBy(['user' => $user]);
     }
 }

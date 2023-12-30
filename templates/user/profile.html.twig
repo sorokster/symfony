@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+{% block title %} Hello, {{ user.name }}{{ parent() }}{% endblock %}
+{% block body %}
+    <h1>User Info</h1>
+    <div class="container user-block">
+        <div class="row">
+            <div class="col">
+                Id: {{ user.id }}
+                <br>
+                Name: {{ user.name }}
+                <br>
+                Email: {{ user.email }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Encode{{ parent() }}{% endblock %}
+
+{% block body %}
+    <div>
+        <ul>
+            <li>
+                <a href="{{ path('shortener_encode') }}">Encode url</a>
+            </li>
+            <li>
+                <a href="{{ path('shortener_statistics') }}">All statistics</a>
+            </li>
+        </ul>
+    </div>
+{% endblock %}
